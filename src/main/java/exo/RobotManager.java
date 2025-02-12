@@ -5,11 +5,29 @@ import java.util.Map;
 
 public class RobotManager {
     private Map<String, RemoteRobotClient> robots = new HashMap<>();
+    private int mapWidth = 0;
+    private int mapHeight = 0;
+
 
     public void addRobot(RemoteRobotClient robot) {
         robots.put(robot.getRobotName(), robot);
         System.out.println("[INFO] Roboter hinzugefügt: " + robot.getRobotName());
     }
+
+    public void processInitResult(int width, int height) {
+        System.out.println("[DEBUG] processInitResult() wurde aufgerufen: WIDTH=" + width + ", HEIGHT=" + height);
+        this.mapWidth = width;
+        this.mapHeight = height;
+    }
+
+    public int getMapWidth() {
+        return mapWidth;
+    }
+
+    public int getMapHeight() {
+        return mapHeight;
+    }
+
 
     public void processLandResult(String robotName, int x, int y, String direction, String planetName) {
         System.out.println("[DEBUG] processLandResult() wurde aufgerufen für " + robotName);

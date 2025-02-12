@@ -9,6 +9,11 @@ public class ExoResponseParser {
 
         gui.log("[DEBUG] Server-Antwort empfangen: " + response);
 
+        if (response.contains("\"CMD\":\"init\"")) {
+            int width = extractInt(response, "\"WIDTH\":");
+            int height = extractInt(response, "\"HEIGHT\":");
+            robotManager.processInitResult(width, height);
+        }
         if (response.contains("\"CMD\":\"landed\"")) {
             int x = extractInt(response, "\"X\":");
             int y = extractInt(response, "\"Y\":");
