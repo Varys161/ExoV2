@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS exoplanet;
+USE exoplanet;
+
+-- Tabelle für die Roboterpositionen und -zustände
+CREATE TABLE IF NOT EXISTS robots (
+    id INT PRIMARY KEY,
+    x INT NOT NULL,
+    y INT NOT NULL,
+    direction ENUM('NORTH', 'EAST', 'SOUTH', 'WEST') NOT NULL,
+    energy INT NOT NULL CHECK (energy BETWEEN 0 AND 100)
+);
+
+-- Tabelle für die Messwerte der Roboter
+CREATE TABLE IF NOT EXISTS measurements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    robot_id INT NOT NULL,
+    x INT NOT NULL,
+    y INT NOT NULL,
+    temperature FLOAT NOT NULL,
+    ground ENUM('NICHTS', 'SAND', 'GEROELL', 'FELS', 'WASSER', 'PFLANZEN', 'MORAST', 'LAVA') NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (robot_id) REFERENCES robots(id) ON DELETE CASCADE
+);
