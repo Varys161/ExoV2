@@ -2,8 +2,6 @@ package exo;
 
 import java.io.Serializable;
 
-// Positionsdaten
-
 public class Position implements Serializable {
 
     private static final long serialVersionUID = -2782482662823778148L;

@@ -9,11 +9,6 @@ public class ExoResponseParser {
 
         gui.log("[DEBUG] Server-Antwort empfangen: " + response);
 
-        if (response.contains("\"CMD\":\"init\"")) {
-            int width = extractInt(response, "\"WIDTH\":");
-            int height = extractInt(response, "\"HEIGHT\":");
-            robotManager.processInitResult(width, height);
-        }
         if (response.contains("\"CMD\":\"landed\"")) {
             int x = extractInt(response, "\"X\":");
             int y = extractInt(response, "\"Y\":");
@@ -33,7 +28,7 @@ public class ExoResponseParser {
         }
 
         if (response.contains("\"CMD\":\"scaned\"")) {
-            int x = -1;  // Standardwert setzen, da keine X- und Y-Werte in `scaned` enthalten sind
+            int x = -1;
             int y = -1;
             String groundType = extractString(response, "\"GROUND\":\"");
             float temperature = extractFloat(response, "\"TEMP\":");

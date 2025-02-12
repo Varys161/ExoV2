@@ -2,8 +2,6 @@ package exo;
 
 import java.io.Serializable;
 
-// Messdaten-Klasse
-
 public class Measure implements Serializable {
 
     private static final long serialVersionUID = 2L;
@@ -49,7 +47,6 @@ public class Measure implements Serializable {
                 float temp = Float.parseFloat(token[2]);
                 return new Measure(g, temp);
             } catch (Exception e) {
-                // Handle exception
             }
         }
         return null;

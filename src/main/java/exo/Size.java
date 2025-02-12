@@ -2,8 +2,6 @@ package exo;
 
 import java.io.Serializable;
 
-// Planetengroesse
-
 public class Size  implements Serializable {
 
     private static final long serialVersionUID = 2L;

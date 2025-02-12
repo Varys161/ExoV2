@@ -1,10 +1,14 @@
 package exo;
 
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class RobotManager {
     private Map<String, RemoteRobotClient> robots = new HashMap<>();
+    private final Map<String, int[]> robotPositions = new HashMap<>();
+    private final Map<String, String> robotDirections = new HashMap<>();
     private int mapWidth = 0;
     private int mapHeight = 0;
 
@@ -67,17 +71,32 @@ public class RobotManager {
     }
 
     public void sendLandCommand(String robotName, int x, int y, String direction) {
+        System.out.println("[INFO] Sende LAND-Kommando für " + robotName + " an (" + x + "," + y + ") Richtung: " + direction);
+
+        JSONObject landCommand = new JSONObject();
+
+        JSONObject position = new JSONObject();
+        position.put("X", x);
+        position.put("Y", y);
+        position.put("DIRECTION", direction);
+
+        landCommand.put("CMD", "land");
+        landCommand.put("POSITION", position);
+
+        // Position & Richtung speichern
+        robotPositions.put(robotName, new int[]{x, y});
+        robotDirections.put(robotName, direction);
+
+        sendCommand(robotName, landCommand.toString());
+    }
+
+    public void sendCommand(String robotName, String command) {
         RemoteRobotClient robot = robots.get(robotName);
         if (robot != null) {
-            String command = String.format(
-                    "{\"CMD\":\"land\",\"POSITION\":{\"X\":%d,\"Y\":%d,\"DIRECTION\":\"%s\"}}",
-                    x, y, direction
-            );
-            DatabaseManager.saveCommand(robotName, "land", "ExoPlanet");
             robot.sendCommand(command);
-            System.out.println("[INFO] Sende LAND-Kommando für " + robotName + " an (" + x + "," + y + ") Richtung: " + direction);
         } else {
-            System.out.println("[ERROR] Roboter nicht gefunden: " + robotName);
+            System.out.println("[ERROR] Kein Roboter mit Namen " + robotName + " gefunden!");
         }
     }
+
 }

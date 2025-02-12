@@ -1,7 +1,5 @@
 package exo;
 
-// Planet beschreibt alles, was man auf einem ExoPlanet mit seinem PlugIn-Robot tun kann...
-
 public interface Planet {
 
     public Measure land(Robot robot, Position landPos);

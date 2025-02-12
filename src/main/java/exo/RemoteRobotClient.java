@@ -42,7 +42,6 @@ public class RemoteRobotClient implements Runnable {
             gui.log("[INFO] " + robotName + " verbunden mit Server: " + hostname + ":" + port);
             sendCommand("{\"CMD\":\"orbit\",\"NAME\":\"" + robotName + "\"}");
 
-            // Automatisches Landen nach Orbit
             Thread.sleep(500);
             robotManager.sendLandCommand(robotName, startX, startY, "NORTH");
 

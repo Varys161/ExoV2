@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DatabaseManager {
     private static final String URL = "jdbc:mysql://localhost:3306/exo_bodenstation";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // Falls dein MySQL ein Passwort hat, hier setzen
+    private static final String PASSWORD = "";
 
     public static Connection connect() {
         try {

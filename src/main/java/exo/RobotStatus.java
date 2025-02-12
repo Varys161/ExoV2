@@ -9,8 +9,6 @@ public interface RobotStatus {
     public String getMessage();
 
     public static RobotStatus parse(String s) {
-        // Implementiere die Logik zum Parsen des RobotStatus aus dem String s
-        // Beispiel:
         String[] token = s.trim().split("\\|");
         if (token.length == 4 && token[0].equals("STATUS")) {
             try {
@@ -19,7 +17,6 @@ public interface RobotStatus {
                 String message = token[3];
                 return new RobotStatusImpl(temp, energy, message);
             } catch (Exception e) {
-                // Handle exception
             }
         }
         return null;
